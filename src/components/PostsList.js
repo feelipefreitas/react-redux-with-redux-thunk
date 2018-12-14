@@ -6,15 +6,24 @@ import { bindActionCreators } from 'redux';
 class PostsList extends React.Component {
 
     componentDidMount() {
-        console.log(this.props);
         this.props.fetchPosts();
-
     }
 
+    renderPosts = posts => {
+        return posts.map(post => {
+            return <div>
+                <p><strong>{ post.title }</strong></p>
+                <p>{ post.body }</p>
+            </div>
+        });
+    };
+
     render() {
+        const {posts} = this.props.posts;
+        
         return (
             <div>
-                PostsList
+                { this.renderPosts(posts) }
             </div>
         );
     }
