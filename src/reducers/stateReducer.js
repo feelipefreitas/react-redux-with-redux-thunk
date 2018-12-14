@@ -1,3 +1,4 @@
 export const stateBase = {
-    posts: []
+    posts: [],
+    users: []
 };
