@@ -1,4 +1,5 @@
 import React from 'react';
+import styled from 'styled-components';
 
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
@@ -14,11 +15,11 @@ class PostsList extends React.Component {
 
     renderPosts = posts => {
         return posts.map(post => {
-            return <div key={ post.id }>
+            return <PostComp key={ post.id }>
                 <p><strong>{ post.title }</strong></p>
                 <p>{ post.body }</p>
                 <UserHeader userId={ post.userId } />
-            </div>
+            </PostComp>
         });
     };
 
@@ -40,5 +41,10 @@ const mapDispatchToProps = dispatch => {
         fetchPostsUsers: bindActionCreators(fetchPostsUsers, dispatch)
     };
 };
+
+const PostComp = styled.div`
+    border: 1px solid black;
+    margin-bottom: 5px;
+`;
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostsList);
