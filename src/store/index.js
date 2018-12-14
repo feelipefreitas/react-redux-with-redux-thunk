@@ -2,6 +2,7 @@ import { createStore, applyMiddleware, compose } from 'redux';
 import reducers from '../reducers';
 import thunk from 'redux-thunk';
 import { createLogger } from 'redux-logger';
+import { composeWithDevTools } from 'redux-devtools-extension';
 
 const middleWare = [];
 
@@ -13,4 +14,4 @@ const loggerMiddleWare = createLogger({
 
 middleWare.push(loggerMiddleWare);
 
-export const store = createStore(reducers, compose(applyMiddleware(...middleWare)));
+export const store = createStore(reducers, composeWithDevTools(applyMiddleware(...middleWare)));

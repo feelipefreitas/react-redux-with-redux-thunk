@@ -1,14 +1,15 @@
 import React from 'react';
+
 import { connect } from 'react-redux';
-import fetchPosts from '../actions/fetchPosts';
-import fetchUsers from '../actions/fetchUsers';
 import { bindActionCreators } from 'redux';
+import fetchPostsUsers from '../actions/fetchPostsUsers';
+
+import UserHeader from './UserHeader';
 
 class PostsList extends React.Component {
 
     componentDidMount() {
-        this.props.fetchPosts();
-        this.props.fetchUsers(1);
+        this.props.fetchPostsUsers();
     }
 
     renderPosts = posts => {
@@ -16,28 +17,27 @@ class PostsList extends React.Component {
             return <div key={ post.id }>
                 <p><strong>{ post.title }</strong></p>
                 <p>{ post.body }</p>
+                <UserHeader userId={ post.userId } />
             </div>
         });
     };
 
     render() {
-        const {posts} = this.props.posts;
         return (
             <div>
-                { this.renderPosts(posts) }
+                { this.renderPosts(this.props.posts) }
             </div>
         );
     }
 }
 
 const mapStateToProps = state => {
-    return { posts: state.posts, users: state.users };
+    return { posts: state.posts };
 };
 
 const mapDispatchToProps = dispatch => {
     return { 
-        fetchPosts: bindActionCreators(fetchPosts, dispatch),
-        fetchUsers: bindActionCreators(fetchUsers, dispatch) 
+        fetchPostsUsers: bindActionCreators(fetchPostsUsers, dispatch)
     };
 };
 

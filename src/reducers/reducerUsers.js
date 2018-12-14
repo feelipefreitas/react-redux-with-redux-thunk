@@ -1,9 +1,9 @@
 import { stateBase } from './stateReducer';
 
-export default (state = stateBase, action) => {
+export default (state = stateBase.users, action) => {
     switch(action.type) {
-        case 'FETCH_USERS':
-            return {...state, users: action.payload};
+        case 'FETCH_USER':
+            return [...state, action.payload];
         default:
             return state;
     }
